@@ -10,17 +10,17 @@ import tempfile
 from datetime import datetime
 from pathlib import Path
 
-from absl import logging, app
-from alphafold.data import templates
-from alphafold.data.pipeline import DataPipeline
-from alphafold.data.tools import hmmsearch, hhsearch
+from absl import app, logging
 from colabfold.utils import DEFAULT_API_SERVER
 
-from alphapulldown.utils.create_custom_template_db import create_db
+from alphafold.data import templates
+from alphafold.data.pipeline import DataPipeline
+from alphafold.data.tools import hhsearch, hmmsearch
 from alphapulldown.objects import MonomericObject
-from alphapulldown.utils.file_handling import iter_seqs, parse_csv_file
-from alphapulldown.utils.modelling_setup import get_run_alphafold, create_uniprot_runner
 from alphapulldown.utils import save_meta_data
+from alphapulldown.utils.create_custom_template_db import create_db
+from alphapulldown.utils.file_handling import iter_seqs, parse_csv_file
+from alphapulldown.utils.modelling_setup import create_uniprot_runner, get_run_alphafold
 
 # Initialize and define flags
 run_af = get_run_alphafold()
@@ -91,8 +91,10 @@ def create_arguments(local_path_to_custom_template_db=None):
     """
     global use_small_bfd
 
+    #FLAGS.uniref30_database_path = get_database_path(FLAGS.uniref30_database_path,
+    #                                                 "uniref30/UniRef30_2023_02")
     FLAGS.uniref30_database_path = get_database_path(FLAGS.uniref30_database_path,
-                                                     "uniref30/UniRef30_2023_02")
+                                                     "uniref30/UniRef30_2021_03")
     FLAGS.uniref90_database_path = get_database_path(FLAGS.uniref90_database_path,
                                                      "uniref90/uniref90.fasta")
     FLAGS.mgnify_database_path = get_database_path(FLAGS.mgnify_database_path,
