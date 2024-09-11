@@ -1,1 +1,2 @@
 include stereo_chemical_props.txt
+include alphapulldown/scripts/*.py
